@@ -1,1 +1,1 @@
-from checker.Alloy import *
+from checker.SRO import *
