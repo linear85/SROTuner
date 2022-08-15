@@ -6,9 +6,10 @@ import numpy as np
 
 # This class to create some DataFrame and graph to save the information of the crystal structure
 class SRO_Data():
-    def __init__(self, file_path:str, N:int):
+    def __init__(self, file_path:str, N:int, element: int):
         pipeline            = import_file(file_path)
         data                = pipeline.compute()
+        self.elements       = element
         self.totalNumber    = data.particles.count
         self.composition    = self.getComposition(data)
         finder              = NearestNeighborFinder(N, data)
@@ -50,7 +51,6 @@ class SRO_Data():
     
     def getComposition(self, data:object) -> np:
         ptypes = data.particles.particle_types
-        self.elements = ptypes.type + 1
         tmp = np.array([0 for _ in range(self.elements)])
         for i in ptypes:
             tmp[i-1] += 1

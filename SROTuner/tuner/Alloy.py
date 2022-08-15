@@ -14,14 +14,16 @@ class Alloy():
         '''
         Args:
             strcuture_file (string):                the lammps data about the alloy
-            WCPs (np.array of float 4x4):           the Warren-Cowley parameters
+            WCPs (np.array):                        the Warren-Cowley parameters
             saved_path (string or False):           the path and filename to save the created atomic configuration / Do not save
             structure (str):                        the atomic number in the first shell (indicate the crystal structure, for example BCC: 8)
             tolerance (int):                        the tolerance (difference between real and want WCP) to finish the tuning
         '''
         assert (structure == "BCC" or structure == 'FCC'), "only support BCC and FCC structure"
         self.N           = 8 if structure == "BCC" else 14
-        self.data        = SRO_Data(strcuture_file, self.N)
+        self.readFile    = strcuture_file
+        # self.data        = SRO_Data(strcuture_file, self.N)
+        self.data        = self.create_SRO_Data()
         print("Finish reading")
         self.totalNumber = self.data.totalNumber
         self.range       = [i for i in range(self.totalNumber)]
@@ -32,9 +34,13 @@ class Alloy():
         print("Finish random assign")
         self.curWCPs     = self.getCurWCPs()
         # print(self.curWCPs)
-        print(self.wantWCPs)
+        # print(self.wantWCPs)
         self.name = saved_path
         self.tolerance = tolerance
+    
+    @abstractclassmethod
+    def create_SRO_Data(self):
+        pass
     
     @abstractclassmethod
     def getWantWCPs(self):
@@ -93,7 +99,8 @@ class Alloy():
                 # print(l_D)
                 self.swapAtoms(atom_1, atom_2)
                 tmp_sum = np.sum(np.absolute(t_D))
-                print(tmp_sum)
+                print(int(tmp_sum), end='\r')
+                
                 # print(t_D)
     
     # Helper function to check the different between actual SRO and idea SRO is smaller than the tolerance or not

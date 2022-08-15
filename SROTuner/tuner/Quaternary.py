@@ -1,4 +1,5 @@
 from tuner.Alloy import Alloy
+from tuner.SRO_Data import SRO_Data
 import random
 import numpy as np
 from tqdm import tqdm
@@ -7,6 +8,9 @@ class Quaternary(Alloy):
     def __init__(self, strcuture_file: str, WCPs: np, saved_path: str or bool, structure: str, tolerance=30):
         super().__init__(strcuture_file, WCPs, saved_path, structure, tolerance)
     
+    def create_SRO_Data(self):
+        return SRO_Data(self.readFile, self.N, 4)
+
     def getWantWCPs(self, WCPs:np) -> np:
         compArray = np.array([[self.comp[0], self.comp[1], self.comp[2], self.comp[3]],
                               [self.comp[0], self.comp[1], self.comp[2], self.comp[3]],

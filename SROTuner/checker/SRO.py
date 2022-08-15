@@ -3,11 +3,11 @@ from ovito.data import NearestNeighborFinder
 import numpy as np
 
 class SRO:
-    def __init__(self, dataFile: str, structure: str,  composition = None) -> None:
+    def __init__(self, dataFile: str, structure: str, elements: int, composition = None) -> None:
         pipeline = import_file(dataFile)
         self.data = pipeline.compute()
         self.eleTypes = self.data.particles.particle_types
-        self.elements = self.eleTypes.type + 1
+        self.elements = elements
         self.composition = self.getComposition() if (not composition) else composition
         assert self.elements == len(self.composition), f"the given composition shows {len(self.composition)} elements\n, but ovito detects {self.elements} elements"
         self.SRO_WCP = [[] for _ in range(self.elements**2)]
