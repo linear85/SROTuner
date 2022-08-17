@@ -1,5 +1,5 @@
 from abc import abstractclassmethod
-from src.tuner.SRO_Data import SRO_Data
+from tuner.SRO_Data import SRO_Data
 import random
 import pandas as pd
 import numpy as np

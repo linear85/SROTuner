@@ -1,9 +1,10 @@
 import numpy as np
 import os
 
-from src.checker import SRO
-from src.tuner import Quaternary
-from src.tuner import Ternary
+
+from SROTuner import SRO
+from SROTuner import Quaternary
+from SROTuner import Ternary
 np.set_printoptions(suppress=True)
 
 def testSRO_Check(testFile: str, WCP: np, element: int, structure: str,  messges: str, tolerance = 0.05) -> bool:
@@ -32,14 +33,14 @@ def testSRO_Tuner(testFile: str, WCP: np, element: int, structure: str, toleranc
 
 def testSRO_BCC_Ternary_Equiatomic_Random():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "BCC", "ternary", "MoNbTa_Random.lmp")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "BCC", "ternary", "MoNbTa_Random.lmp")
     Actual_WCP  = np.zeros((3, 3))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 3, "BCC", "BCC Ternary Equiatomic Random")
 
 
 def testSRO_BCC_Ternary_Equiatomic_Order():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "BCC", "ternary", "MoNbTa_Order.lmp")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "BCC", "ternary", "MoNbTa_Order.lmp")
     Actual_WCP  = np.array([[ 0.64082326,  0.06680182, -0.70809454],
                             [ 0.06680182, -0.40116626,  0.3343155 ],
                             [-0.70809454,  0.3343155,   0.37429779]])
@@ -48,14 +49,14 @@ def testSRO_BCC_Ternary_Equiatomic_Order():
 
 def testSRO_BCC_Quaternary_Equiatomic_Random():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "BCC", "quaternary", "Mo25Nb25Ta25W25_Random.dump")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "BCC", "quaternary", "Mo25Nb25Ta25W25_Random.dump")
     Actual_WCP  = np.zeros((4, 4))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 4, "BCC", "BCC Quaternary Equiatomic Random")
 
 
 def testSRO_BCC_Quaternary_Equiatomic_Order():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "BCC", "quaternary", "Mo25Nb25Ta25W25_Order.dump")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "BCC", "quaternary", "Mo25Nb25Ta25W25_Order.dump")
     Actual_WCP  = np.array([[0.845214844, 	-0.266357422,	-0.943603516,	0.364746094],
                             [-0.266357422,	-0.043212891, 	0.470703125,	-0.161132813],
                             [-0.943359375,	0.471435547,	0.708984375,   	-0.237060547],
@@ -65,20 +66,20 @@ def testSRO_BCC_Quaternary_Equiatomic_Order():
 
 def testSRO_FCC_Ternary_Equiatomic_Random():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "FCC", "ternary", "FeCoNi_random.lmp")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "FCC", "ternary", "FeCoNi_random.lmp")
     Actual_WCP  = np.zeros((3, 3))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 3, "FCC", "FCC Ternary Equiatomic Random")
 
 def testSRO_FCC_Quaternary_Equiatomic_Random():
     baseDir = os.getcwd()
-    testSRO_Check_File = os.path.join(baseDir, "SROTuner", "testData", "SRO_Check", "FCC", "quaternary", "FeCoCrNi_Random.lmp")
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "FCC", "quaternary", "FeCoCrNi_Random.lmp")
     Actual_WCP  = np.zeros((4, 4))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 4, "FCC", "FCC Quaternary Equiatomic Random")
 
 
 def testTuner_BCC_Ternary_Equiatomic():
     baseDir = os.getcwd()
-    inputFile = os.path.join(baseDir, "SROTuner", "testData", "SRO_Tune", "BCC", "ternary", "MoNbTa_Random.lmp")
+    inputFile = os.path.join(baseDir, "SRO_Tune", "BCC", "ternary", "MoNbTa_Random.lmp")
     WCP  = np.array([[ 0.64082326,  0.06680182, -0.70809454],
                      [ 0.06680182, -0.40116626,  0.3343155 ],
                      [-0.70809454,  0.3343155,   0.37429779]])
@@ -87,7 +88,7 @@ def testTuner_BCC_Ternary_Equiatomic():
 
 def testTuner_BCC_Quaternary_Equiatomic():
     baseDir = os.getcwd()
-    inputFile = os.path.join(baseDir, "SROTuner", "testData", "SRO_Tune", "BCC", "quaternary", "Mo25Nb25Ta25W25_Random.lmp")
+    inputFile = os.path.join(baseDir, "SRO_Tune", "BCC", "quaternary", "Mo25Nb25Ta25W25_Random.lmp")
     WCP  = np.array([[0.845214844, 	-0.266357422,	-0.943603516,	0.364746094],
                      [-0.266357422,	-0.043212891, 	0.470703125,	-0.161132813],
                      [-0.943359375,	0.471435547,	0.708984375,   	-0.237060547],

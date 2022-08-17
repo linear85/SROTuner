@@ -1,1 +1,1 @@
-from src.checker.SRO import SRO
+from checker.SRO import SRO
