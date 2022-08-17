@@ -1,9 +1,9 @@
 import numpy as np
 import os
 
-from checker import SRO
-from tuner import Quaternary
-from tuner import Ternary
+from src.checker import SRO
+from src.tuner import Quaternary
+from src.tuner import Ternary
 np.set_printoptions(suppress=True)
 
 def testSRO_Check(testFile: str, WCP: np, element: int, structure: str,  messges: str, tolerance = 0.05) -> bool:
@@ -94,12 +94,12 @@ def testTuner_BCC_Quaternary_Equiatomic():
                      [0.364746094,  -0.161132813,	-0.237060547,	0.033447266]])
     testSRO_Tuner(inputFile, WCP, 4, "BCC")
 
-# testSRO_BCC_Ternary_Equiatomic_Random()
-# testSRO_BCC_Ternary_Equiatomic_Order()
-# testSRO_BCC_Quaternary_Equiatomic_Random()
-# testSRO_BCC_Quaternary_Equiatomic_Order()
-# testTuner_BCC_Ternary_Equiatomic()
-# testTuner_BCC_Quaternary_Equiatomic()
+testSRO_BCC_Ternary_Equiatomic_Random()
+testSRO_BCC_Ternary_Equiatomic_Order()
+testSRO_BCC_Quaternary_Equiatomic_Random()
+testSRO_BCC_Quaternary_Equiatomic_Order()
+testTuner_BCC_Ternary_Equiatomic()
+testTuner_BCC_Quaternary_Equiatomic()
 
 testSRO_FCC_Ternary_Equiatomic_Random()
 testSRO_FCC_Quaternary_Equiatomic_Random()
