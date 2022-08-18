@@ -20,7 +20,7 @@ class Alloy():
             tolerance (int):                        the tolerance (difference between real and want WCP) to finish the tuning
         '''
         assert (structure == "BCC" or structure == 'FCC'), "only support BCC and FCC structure"
-        self.N           = 8 if structure == "BCC" else 14
+        self.N           = 8 if structure == "BCC" else 12
         self.readFile    = strcuture_file
         # self.data        = SRO_Data(strcuture_file, self.N)
         self.data        = self.create_SRO_Data()

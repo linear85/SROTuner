@@ -22,10 +22,11 @@ def testSRO_Tuner(testFile: str, WCP: np, element: int, structure: str, toleranc
     outputStr = os.path.join(baseDir, "tmp.lmp")
     match element:
         case 3: tuner = Ternary(testFile, WCP, outputStr, structure, tolerance) 
-        case 4: tuner = Quaternary(testFile, WCP, outputStr, structure, tolerance) 
+        case 4: tuner = Quaternary(testFile, WCP, outputStr, structure, tolerance)
+    print(tuner.N)
     tuner.adjustSRO()
     WCP2 = SRO(outputStr, structure, element).WCP()
-    # print(WCP2)
+    print(WCP2)
     # print(WCP)
     os.remove(outputStr)
     return
@@ -70,11 +71,30 @@ def testSRO_FCC_Ternary_Equiatomic_Random():
     Actual_WCP  = np.zeros((3, 3))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 3, "FCC", "FCC Ternary Equiatomic Random")
 
+
+def testSRO_FCC_Ternary_Equiatomic_Order():
+    baseDir = os.getcwd()
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "FCC", "ternary", "FeCoNi_order.lmp")
+    Actual_WCP = np.array([[ 0.3,  0.1, -0.4],
+                           [ 0.1, -0.2,  0.1],
+                           [-0.4,  0.1,  0.3]])
+    testSRO_Check(testSRO_Check_File, Actual_WCP, 3, "FCC", "FCC Ternary Equiatomic Order")
+
 def testSRO_FCC_Quaternary_Equiatomic_Random():
     baseDir = os.getcwd()
     testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "FCC", "quaternary", "FeCoCrNi_Random.lmp")
     Actual_WCP  = np.zeros((4, 4))
     testSRO_Check(testSRO_Check_File, Actual_WCP, 4, "FCC", "FCC Quaternary Equiatomic Random")
+
+
+def testSRO_FCC_Quaternary_Equiatomic_Order():
+    baseDir = os.getcwd()
+    testSRO_Check_File = os.path.join(baseDir, "SRO_Check", "FCC", "quaternary", "FeCoCrNi_order.lmp")
+    Actual_WCP  = np.array([[0.1, 	-0.1,  -0.1,	0.1],
+                            [-0.1,	-0.2, 	0.2,    0.1],
+                            [-0.1,	 0.2,	0.1,   -0.2],
+                            [0.1,   0.1,  -0.2,	0  ]])
+    testSRO_Check(testSRO_Check_File, Actual_WCP, 4, "FCC", "FCC Quaternary Equiatomic Order")
 
 
 def testTuner_BCC_Ternary_Equiatomic():
@@ -95,13 +115,40 @@ def testTuner_BCC_Quaternary_Equiatomic():
                      [0.364746094,  -0.161132813,	-0.237060547,	0.033447266]])
     testSRO_Tuner(inputFile, WCP, 4, "BCC")
 
-testSRO_BCC_Ternary_Equiatomic_Random()
-testSRO_BCC_Ternary_Equiatomic_Order()
-testSRO_BCC_Quaternary_Equiatomic_Random()
-testSRO_BCC_Quaternary_Equiatomic_Order()
-testTuner_BCC_Ternary_Equiatomic()
-testTuner_BCC_Quaternary_Equiatomic()
 
-testSRO_FCC_Ternary_Equiatomic_Random()
-testSRO_FCC_Quaternary_Equiatomic_Random()
+def testTuner_FCC_Ternary_Equiatomic():
+    baseDir = os.getcwd()
+    inputFile = os.path.join(baseDir, "SRO_Tune", "FCC", "ternary", "FeCoNi_random.lmp")
+    WCP  = np.array([[ 0.3,  0.1, -0.4],
+                     [ 0.1, -0.2,  0.1],
+                     [-0.4,  0.1,  0.3]])
+    testSRO_Tuner(inputFile, WCP, 3, "FCC")
+
+
+def testTuner_FCC_Quaternary_Equiatomic():
+    baseDir = os.getcwd()
+    inputFile = os.path.join(baseDir, "SRO_Tune", "FCC", "quaternary", "FeCoCrNi_Random.lmp")
+    WCP  = np.array([[0.1, 	-0.1,  -0.1,	0.1],
+                     [-0.1,	-0.2, 	0.2,    0.1],
+                     [-0.1,	 0.2,	0.1,   -0.2],
+                     [0.1,   0.1,  -0.2,	0  ]])
+    testSRO_Tuner(inputFile, WCP, 4, "FCC")
+
+
+
+# testSRO_BCC_Ternary_Equiatomic_Random()
+# testSRO_BCC_Ternary_Equiatomic_Order()
+# testSRO_BCC_Quaternary_Equiatomic_Random()
+# testSRO_BCC_Quaternary_Equiatomic_Order()
+# testSRO_FCC_Ternary_Equiatomic_Random()
+# testSRO_FCC_Ternary_Equiatomic_Order()
+# testSRO_FCC_Quaternary_Equiatomic_Random()
+# testSRO_FCC_Quaternary_Equiatomic_Order()
+
+
+# testTuner_BCC_Ternary_Equiatomic()
+# testTuner_BCC_Quaternary_Equiatomic()
+# testTuner_FCC_Ternary_Equiatomic()
+# testTuner_FCC_Quaternary_Equiatomic()
+
 
