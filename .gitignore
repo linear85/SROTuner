@@ -1,0 +1,5 @@
+build/
+dist/
+SROTuner/src/__pycache__/
+SROTuner/src/checker/__pycache__/
+SROTuner/src/tuner/__pycache__/
