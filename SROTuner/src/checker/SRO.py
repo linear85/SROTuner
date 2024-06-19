@@ -35,7 +35,10 @@ class SRO:
     def reshapeWCP(self) -> np.ndarray:
         SRO_para = []
         for sro in self.SRO_WCP:
-            tmp = sum(sro)/len(sro)
+            if len(sro) == 0:
+                tmp = np.nan
+            else:
+                tmp = sum(sro)/len(sro)
             SRO_para.append(tmp)
         SRO_para = np.array(SRO_para)
         SRO_para = SRO_para.reshape(self.elements, self.elements)

@@ -140,7 +140,7 @@ class Alloy():
     def checkAccept(t_D:np, l_D:np) -> bool:
         prev = np.sum(np.absolute(t_D))
         late = np.sum(np.absolute(t_D - l_D))
-        if (random.uniform(0, 1) < 0.01):
+        if (random.uniform(0, 1) < 0.0001):
              return late <= prev+6
         return late <= prev
     
